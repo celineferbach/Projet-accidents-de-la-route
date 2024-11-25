@@ -16,3 +16,8 @@ lieux_2023 = pd.read_csv(url_lieux_2023, sep = ';')
 
 url_caract_2023 = "https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2023/20241028-103125/caract-2023.csv"
 caract_2023 = pd.read_csv(url_caract_2023, sep = ';')
+
+v2023 = vehicules_2023.drop(["id_vehicule", "num_veh"], axis=1)
+donnees_2023 = pd.merge(usagers_2023, v2023, on = "Num_Acc")
+donnees_2023 = pd.merge(donnees_2023, lieux_2023, on = "Num_Acc")
+donnees_2023 = pd.merge(donnees_2023, caract_2023, on = "Num_Acc")

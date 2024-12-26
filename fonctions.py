@@ -1,7 +1,9 @@
+import requests
+
 
 # Fonction pour charger les donnees
 
-def recuperer_donnees(dataset_id, fichier_csv, separateur):
+def recuperer_donnees(dataset_id, fichier_csv, sep):
     """
     Cette fonction télécharge les données d'un fichier CSV à partir d'une URL et les charge dans un DataFrame pandas.
     
@@ -12,7 +14,7 @@ def recuperer_donnees(dataset_id, fichier_csv, separateur):
     Retourne:
     DataFrame: Un DataFrame pandas contenant les données du fichier CSV.
     """
-
+   
     # URL de base pour accéder à l'API
     base_api = "https://www.data.gouv.fr/api/1/"
 
@@ -28,7 +30,7 @@ def recuperer_donnees(dataset_id, fichier_csv, separateur):
         with open(fichier_csv, 'wb') as file:
             file.write(response.content)
         print("Le fichier a été téléchargé avec succès.")
-        df = pd.read_csv(fichier_csv, sep = separateur)
+        df = pd.read_csv(fichier_csv, sep = sep)
         return df
     else:
         print("La requête a échoué. Code d'état:", response.status_code)

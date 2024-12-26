@@ -1,6 +1,3 @@
-import requests
-
-
 # Fonction pour charger les donnees
 
 def recuperer_donnees(dataset_id, fichier_csv, sep):
@@ -14,7 +11,10 @@ def recuperer_donnees(dataset_id, fichier_csv, sep):
     Retourne:
     DataFrame: Un DataFrame pandas contenant les données du fichier CSV.
     """
-   
+    
+    import requests
+    import pandas as pd
+
     # URL de base pour accéder à l'API
     base_api = "https://www.data.gouv.fr/api/1/"
 

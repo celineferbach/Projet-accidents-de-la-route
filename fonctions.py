@@ -1,5 +1,7 @@
-# Fonction pour charger les donnees
+import requests
+import pandas as pd
 
+# Fonction pour charger les donnees
 def recuperer_donnees(dataset_id, fichier_csv, sep):
     """
     Cette fonction télécharge les données d'un fichier CSV à partir d'une URL et les charge dans un DataFrame pandas.
@@ -11,9 +13,6 @@ def recuperer_donnees(dataset_id, fichier_csv, sep):
     Retourne:
     DataFrame: Un DataFrame pandas contenant les données du fichier CSV.
     """
-    
-    import requests
-    import pandas as pd
 
     # URL de base pour accéder à l'API
     base_api = "https://www.data.gouv.fr/api/1/"
@@ -36,7 +35,36 @@ def recuperer_donnees(dataset_id, fichier_csv, sep):
         print("La requête a échoué. Code d'état:", response.status_code)
         return None
 
+#Fonction pour récupérer les données d'un fichier csv.gz ( pour les données météorologiques )
+def recuperer_donnees_gz(dataset_id, fichier_csv, sep):
+    """
+    Cette fonction télécharge les données d'un fichier CSV.GZ à partir d'une URL et les charge dans un DataFrame pandas.
+    
+    Paramètres:
+    dataset_id (str): identifiant du fichier CSV.GZ.
+    fichier_csv (str): Le nom du fichier CSV.GZ à enregistrer localement.
+    sep ( str ) : le séparateur à utiliser
+    
+    Retourne:
+    DataFrame: Un DataFrame pandas contenant les données du fichier CSV.
+    """
 
+    # URL de base pour accéder à l'API
+    base_api = "https://www.data.gouv.fr/api/1/"
+
+    # Chemin pour accéder aux enregistrements du dataset
+    key_api = "datasets/r/"
+
+    # Construction de l'URL complète
+    url = f"{base_api}{key_api}{dataset_id}"
+
+
+    response = requests.get(url)
+    response.raise_for_status()
+    with gzip.GzipFile(fileobj=io.BytesIO(response.content)) as gz:
+        df = pd.read_csv(gz, sep = sep)
+    
+    return df
 
 # Fonction pour labeliser les variables d'un dataframe
 def labeliser_variables(df, mapping_dict):
@@ -52,9 +80,9 @@ def labeliser_variables(df, mapping_dict):
     pd.DataFrame: DataFrame avec les variables labelisées.
     """
 
-    import pandas as pd
-
     for col, map_dict in mapping_dict.items():
         if col in df.columns:
             df[col] = df[col].map(map_dict)
     return df
+
+

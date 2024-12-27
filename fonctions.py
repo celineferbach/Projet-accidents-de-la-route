@@ -36,3 +36,25 @@ def recuperer_donnees(dataset_id, fichier_csv, sep):
         print("La requête a échoué. Code d'état:", response.status_code)
         return None
 
+
+
+# Fonction pour labeliser les variables d'un dataframe
+def labeliser_variables(df, mapping_dict):
+    """
+    Labelise les variables d'un DataFrame en utilisant un dictionnaire de correspondance.
+    
+    Parameters:
+    df (pd.DataFrame): DataFrame contenant les variables à labeliser.
+    mapping_dict (dict): Dictionnaire de correspondance où chaque clé est le nom de la colonne
+                         et la valeur est un dictionnaire de mappage des valeurs.
+    
+    Returns:
+    pd.DataFrame: DataFrame avec les variables labelisées.
+    """
+
+    import pandas as pd
+
+    for col, map_dict in mapping_dict.items():
+        if col in df.columns:
+            df[col] = df[col].map(map_dict)
+    return df

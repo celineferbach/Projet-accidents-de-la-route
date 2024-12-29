@@ -15,10 +15,14 @@ Pour cela, nous avons utilisé 4 bases de données principales :
 # Plan
 
 Notre projet se divise en 5 parties :
-## I. Importation des bases de données
-## II. Traitement des données
+### I. Importation des bases de données
+### II. Traitement des données
   Traitement de la base des usagers, des véhicules, des lieux, des caractéristiques, de la correspondance départements-régions, du géodataframe, des données météorologiques
-## III. Analyse des données
+### III. Analyse des données
   Distribution du nombre de victimes en fonction de la gravité de l'accident, distribution de la gravité pour différentes vitesses maximales autorisées
   Nombre d'accidents en fonction de la météo
+### IV. Analyse cartographique
+  Localisation des accidents par région
+  Analyse cartographique de la gravité
+### V. Modélisation
   

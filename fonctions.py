@@ -1,5 +1,7 @@
 import requests
 import pandas as pd
+import gzip
+import io
 
 # Fonction pour charger les donnees
 def recuperer_donnees(dataset_id, fichier_csv, sep):
@@ -37,6 +39,8 @@ def recuperer_donnees(dataset_id, fichier_csv, sep):
 
 #Fonction pour récupérer les données d'un fichier csv.gz ( pour les données météorologiques )
 def recuperer_donnees_gz(dataset_id, fichier_csv, sep):
+    import gzip
+    import io
     """
     Cette fonction télécharge les données d'un fichier CSV.GZ à partir d'une URL et les charge dans un DataFrame pandas.
     
